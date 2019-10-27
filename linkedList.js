@@ -12,7 +12,7 @@ class LinkedList {
     constructor()
     {
         this.head = null;
-
+        this.size = 0;
     }
 
     // functions to be implemented
@@ -30,6 +30,38 @@ class LinkedList {
         }
         current.next = node;
       }
+      this.size++;
+    }
+    //insert at given position
+
+    insertAt(element, position){
+      var head = this.head;
+      var node = new Node(element);
+      if(position <=0 || position>this.size+1)
+        return;
+      else if(position == 1){
+        node.next = head;
+        this.head = node;
+      }
+      else if(position == this.size+1){
+        var current = this.head;
+        while(current.next){
+          current = current.next;
+        }
+        current.next = node;
+      }
+      else{
+        var current = this.head;
+        for(var i=1; i<position-1; i++){
+          current = current.next;
+        }
+        var nextNode = current.next;
+        node.next = current.next.next;
+        current.next = node;
+
+      }
+      this.size++;
+
     }
 
     printList(){
@@ -53,4 +85,7 @@ ll.add(20);
 ll.add(30);
 ll.add(40);
 ll.add(50);
+ll.insertAt(5, 1);
+ll.insertAt(60, 7);
+ll.insertAt(35, 5);
 console.log(ll.printList());
