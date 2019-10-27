@@ -63,6 +63,7 @@ class LinkedList {
       this.size++;
 
     }
+    //Remove from any position
 
     removeFrom(position){
       if(position <= 0 || position > this.size+1)
@@ -91,6 +92,20 @@ class LinkedList {
       this.size--;
     }
 
+    reverseList(){
+      var current = this.head;
+      var prev = null;
+      var next = null;
+
+      while(current != null){
+        next = current.next;
+        current.next = prev;
+        prev = current;
+        current = next;
+      }
+      this.head = prev;
+    }
+
     printList(){
       var str = '';
       var current = this.head;
@@ -112,6 +127,8 @@ ll.add(20);
 ll.add(30);
 ll.add(40);
 ll.add(50);
+console.log(ll.printList());
+ll.reverseList();
 console.log(ll.printList());
 ll.insertAt(5, 1);
 console.log(ll.printList());
