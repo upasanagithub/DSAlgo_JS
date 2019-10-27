@@ -56,12 +56,39 @@ class LinkedList {
           current = current.next;
         }
         var nextNode = current.next;
-        node.next = current.next.next;
+        node.next = current.next;
         current.next = node;
 
       }
       this.size++;
 
+    }
+
+    removeFrom(position){
+      if(position <= 0 || position > this.size+1)
+        return;
+      else if(position == 1){
+        this.head = this.head.next;
+      }
+      else if(position == this.size){
+        var current = this.head;
+        var lastPrevNode;
+        while(current.next){
+          lastPrevNode = current;
+          current = current.next;
+        }
+        lastPrevNode.next = null;
+      }
+      else{
+        var current = this.head;
+
+        for(var i=1; i<position-1; i++){
+          current = current.next;
+        }
+        current.next = current.next.next;
+      }
+
+      this.size--;
     }
 
     printList(){
@@ -85,7 +112,16 @@ ll.add(20);
 ll.add(30);
 ll.add(40);
 ll.add(50);
+console.log(ll.printList());
 ll.insertAt(5, 1);
+console.log(ll.printList());
 ll.insertAt(60, 7);
+console.log(ll.printList());
 ll.insertAt(35, 5);
+console.log(ll.printList());
+ll.removeFrom(1);
+console.log(ll.printList());
+ll.removeFrom(7);
+console.log(ll.printList());
+ll.removeFrom(5);
 console.log(ll.printList());
